@@ -5,6 +5,7 @@ import com.kt.springbootstudy.service.PostService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/posts")
@@ -23,7 +24,7 @@ public class PostController {
 
 	// 특정 글 조회
 	@GetMapping("/{id}")
-	public Post getPostById(@PathVariable int id) {
+	public Optional<Post> getPostById(@PathVariable int id) {
 		return postService.getPostById(id);
 	}
 

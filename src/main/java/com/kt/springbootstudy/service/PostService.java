@@ -1,59 +1,53 @@
 package com.kt.springbootstudy.service;
 
 import com.kt.springbootstudy.model.Post;
+import com.kt.springbootstudy.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
-	private List<Post> posts = new ArrayList<>();
-	private int nextId = 1; // int 타입 ID 자동 증가
+	private final PostRepository postRepository;
+
+	public PostService(PostRepository postRepository) {
+		this.postRepository = postRepository;
+	}
 
 	// 모든 글 조회
 	public List<Post> getAllPosts() {
-		return posts;
+		return postRepository.findAll();
 	}
 
-	// 특정 글 조회 (for 문 사용)
-	public Post getPostById(int id) {
-		for (Post post : posts) {
-			if (post.getId() == id) {
-				return post;
-			}
-		}
-		return null; // ID가 없으면 null 반환
+	// 특정 글 조회
+	public Optional<Post> getPostById(int id) {
+		return postRepository.findById(id);
 	}
 
 	// 글 작성
 	public Post addPost(Post post) {
-		post.setId(nextId++);
-		posts.add(post);
-		return post;
+		return postRepository.save(post);
 	}
 
 	// 글 수정
 	public boolean updatePost(int id, Post newPost) {
-		for (Post post : posts) {
-			if (post.getId() == id) {
-				post.setTitle(newPost.getTitle());
-				post.setContent(newPost.getContent());
-				post.setAuthor(newPost.getAuthor());
-				return true;
-			}
-		}
-		return false;
+		return postRepository.findById(id)
+				.map(post -> {
+					post.setTitle(newPost.getTitle());
+					post.setContent(newPost.getContent());
+					post.setAuthor(newPost.getAuthor());
+					postRepository.save(post);
+					return true;
+				}).orElse(false);
 	}
 
-	// 글 삭제 (for 문 사용)
+	// 글 삭제
 	public boolean deletePost(int id) {
-		for (int i = 0; i < posts.size(); i++) {
-			if (posts.get(i).getId() == id) {
-				posts.remove(i);
-				return true;
-			}
+		if (postRepository.existsById(id)) {
+			postRepository.deleteById(id);
+			return true;
 		}
-		return false; // ID가 없으면 false 반환
+		return false;
 	}
 }

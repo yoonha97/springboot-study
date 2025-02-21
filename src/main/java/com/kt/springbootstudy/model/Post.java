@@ -1,51 +1,25 @@
 package com.kt.springbootstudy.model;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Post {
-    private int id; // int 타입 ID
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 증가 ID
+    private int id;
+
+    @Column(nullable = false)
     private String title; // 글 제목
+
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content; // 글 내용
+
+    @Column(nullable = false)
     private String author; // 작성자
-
-    public Post() {
-    }
-
-    public Post(int id, String title, String content, String author) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.author = author;
-    }
-
-    // Getter & Setter
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 }
