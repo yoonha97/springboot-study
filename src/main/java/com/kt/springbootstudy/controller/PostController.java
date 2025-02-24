@@ -2,6 +2,8 @@ package com.kt.springbootstudy.controller;
 
 import com.kt.springbootstudy.model.Post;
 import com.kt.springbootstudy.service.PostService;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,15 +38,15 @@ public class PostController {
 
 	// 글 수정
 	@PutMapping("/{id}")
-	public String updatePost(@PathVariable int id, @RequestBody Post post) {
+	public ResponseEntity<String> updatePost(@PathVariable int id, @RequestBody Post post) {
 		boolean updated = postService.updatePost(id, post);
-		return updated ? "Post updated successfully" : "Post not found";
+		return updated ? ResponseEntity.ok("Post updated successfully") : ResponseEntity.notFound().build();
 	}
 
 	// 글 삭제
 	@DeleteMapping("/{id}")
-	public String deletePost(@PathVariable int id) {
+	public ResponseEntity<Void> deletePost(@PathVariable int id) {
 		boolean deleted = postService.deletePost(id);
-		return deleted ? "Post deleted successfully" : "Post not found";
+		return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
 	}
 }
