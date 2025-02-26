@@ -15,3 +15,8 @@
 - 의존성 관리 : Spring Dependency Management (io.spring.dependency-management)
 - 자동 코드 생성 : Lombok
 - 개발 도구 : Spring Boot DevTools
+
+## 🔗 ERD
+
+- Post에 Comment 추가 버전 ERD
+  ![ERD 다이어그램](docs/erd.png)
