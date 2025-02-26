@@ -4,6 +4,7 @@ import com.kt.springbootstudy.model.Post;
 import com.kt.springbootstudy.repository.PostRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PostService {
 	private final PostRepository postRepository;
-
-	public PostService(PostRepository postRepository) {
-		this.postRepository = postRepository;
-	}
 
 	// 모든 글 조회
 	public List<Post> getAllPosts() {
