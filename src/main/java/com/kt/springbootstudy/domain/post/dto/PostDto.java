@@ -12,12 +12,14 @@ public class PostDto {
 	private int id;
 	private String title;
 	private String content;
+	private String author;
 	private List<CommentDto> comments;
 
 	public PostDto(Post post) {
 		this.id = post.getId();
 		this.title = post.getTitle();
 		this.content = post.getContent();
+		this.author = post.getAuthor();
 		this.comments = post.getComments().stream().map(CommentDto::new).collect(Collectors.toList());
 	}
 }

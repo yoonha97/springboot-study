@@ -1,13 +1,14 @@
 package com.kt.springbootstudy.domain.post.service;
 
+import com.kt.springbootstudy.domain.post.dto.PostDto;
 import com.kt.springbootstudy.domain.post.entity.Post;
 import com.kt.springbootstudy.domain.post.repository.PostRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,31 +18,45 @@ public class PostService {
 	private final PostRepository postRepository;
 
 	// 모든 글 조회
-	public List<Post> getAllPosts() {
-		return postRepository.findAll();
+	public List<PostDto> getAllPosts() {
+		List<Post> posts = postRepository.findAll();
+		List<PostDto> postDtos = new ArrayList<>();
+		for (Post post : posts) {
+			postDtos.add(new PostDto(post));
+		}
+		return postDtos;
 	}
 
 	// 특정 글 조회
-	public Optional<Post> getPostById(int id) {
-		return postRepository.findById(id);
+	public Optional<PostDto> getPostById(int id) {
+		Optional<Post> optionalPost = postRepository.findById(id);
+		if (optionalPost.isPresent()) {
+			PostDto postDto = new PostDto(optionalPost.get());
+			return Optional.of(postDto);
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	// 글 작성
-	public Post addPost(Post post) {
-		return postRepository.save(post);
+	public PostDto addPost(Post post) {
+		Post savedPost = postRepository.save(post);
+		return new PostDto(savedPost);
 	}
 
 	// 글 수정
 	@Transactional
-	public boolean updatePost(int id, Post newPost) {
-		return postRepository.findById(id)
-				.map(post -> {
-					post.setTitle(newPost.getTitle());
-					post.setContent(newPost.getContent());
-					post.setAuthor(newPost.getAuthor());
-					// save() 호출 불필요 (Dirty Checking)
-					return true;
-				}).orElse(false);
+	public Optional<PostDto> updatePost(int id, Post newPost) {
+		Optional<Post> optionalPost = postRepository.findById(id);
+		if (optionalPost.isPresent()) {
+			Post post = optionalPost.get();
+			post.setTitle(newPost.getTitle());
+			post.setContent(newPost.getContent());
+			post.setAuthor(newPost.getAuthor());
+			return Optional.of(new PostDto(post));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	// 글 삭제
@@ -49,7 +64,8 @@ public class PostService {
 		if (postRepository.existsById(id)) {
 			postRepository.deleteById(id);
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 }
