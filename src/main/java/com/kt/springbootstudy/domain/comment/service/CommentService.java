@@ -1,10 +1,12 @@
 package com.kt.springbootstudy.domain.comment.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.kt.springbootstudy.domain.comment.dto.CommentDto;
 import com.kt.springbootstudy.domain.comment.entity.Comment;
 import com.kt.springbootstudy.domain.comment.repository.CommentRepository;
 import com.kt.springbootstudy.domain.post.entity.Post;
@@ -19,25 +21,38 @@ public class CommentService {
 	private final PostRepository postRepository;
 
 	// 댓글 작성
-	public Comment addComment(int postId, Comment comment) {
-		Post post = postRepository.findById(postId)
-				.orElseThrow(() -> new RuntimeException("Post not found"));
-		comment.setPost(post);
-		return commentRepository.save(comment);
+	public CommentDto addComment(int postId, Comment comment) {
+		Optional<Post> optionalPost = postRepository.findById(postId);
+		if (optionalPost.isPresent()) {
+			comment.setPost(optionalPost.get());
+			Comment savedComment = commentRepository.save(comment);
+			return new CommentDto(savedComment);
+		} else {
+			throw new RuntimeException("Post not found");
+		}
 	}
 
 	// 댓글 조회
-	public List<Comment> getComments(int postId) {
-		return commentRepository.findByPostId(postId);
+	public List<CommentDto> getComments(int postId) {
+		List<Comment> comments = commentRepository.findByPostId(postId);
+		List<CommentDto> commentDtos = new ArrayList<>();
+		for (Comment comment : comments) {
+			commentDtos.add(new CommentDto(comment));
+		}
+		return commentDtos;
 	}
 
 	// 댓글 수정
-	public Optional<Comment> updateComment(int commentId, Comment updatedComment) {
-		return commentRepository.findById(commentId)
-				.map(comment -> {
-					comment.setContent(updatedComment.getContent());
-					return commentRepository.save(comment);
-				});
+	public Optional<CommentDto> updateComment(int commentId, Comment updatedComment) {
+		Optional<Comment> optionalComment = commentRepository.findById(commentId);
+		if (optionalComment.isPresent()) {
+			Comment comment = optionalComment.get();
+			comment.setContent(updatedComment.getContent());
+			commentRepository.save(comment);
+			return Optional.of(new CommentDto(comment));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	// 댓글 삭제
@@ -45,7 +60,8 @@ public class CommentService {
 		if (commentRepository.existsById(commentId)) {
 			commentRepository.deleteById(commentId);
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 }
