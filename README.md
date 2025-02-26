@@ -19,4 +19,4 @@
 ## 🔗 ERD
 
 - Post에 Comment 추가 버전 ERD
-  ![ERD 다이어그램](docs/erd.png)
+  ![ERD 다이어그램](docs/ERD.png)
