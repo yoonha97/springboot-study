@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kt.springbootstudy.model.Comment;
+import com.kt.springbootstudy.domain.comment.model.Comment;
 import com.kt.springbootstudy.service.CommentService;
 
 import lombok.RequiredArgsConstructor;

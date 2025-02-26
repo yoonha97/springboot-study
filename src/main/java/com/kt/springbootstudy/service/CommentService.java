@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.kt.springbootstudy.model.Comment;
-import com.kt.springbootstudy.model.Post;
+import com.kt.springbootstudy.domain.comment.model.Comment;
+import com.kt.springbootstudy.domain.post.model.Post;
 import com.kt.springbootstudy.repository.CommentRepository;
 import com.kt.springbootstudy.repository.PostRepository;
 

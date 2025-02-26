@@ -1,6 +1,6 @@
 package com.kt.springbootstudy.service;
 
-import com.kt.springbootstudy.model.Post;
+import com.kt.springbootstudy.domain.post.model.Post;
 import com.kt.springbootstudy.repository.PostRepository;
 
 import jakarta.transaction.Transactional;
