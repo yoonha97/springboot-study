@@ -1,4 +1,6 @@
-package com.kt.springbootstudy.domain.comment.model;
+package com.kt.springbootstudy.domain.comment.entity;
+
+import com.kt.springbootstudy.domain.post.entity.Post;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import com.kt.springbootstudy.domain.post.model.Post;
 
 @Entity
 @Getter

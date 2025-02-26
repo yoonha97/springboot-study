@@ -1,4 +1,4 @@
-package com.kt.springbootstudy.controller;
+package com.kt.springbootstudy.domain.comment.controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kt.springbootstudy.domain.comment.model.Comment;
-import com.kt.springbootstudy.service.CommentService;
+import com.kt.springbootstudy.domain.comment.entity.Comment;
+import com.kt.springbootstudy.domain.comment.service.CommentService;
 
 import lombok.RequiredArgsConstructor;
 

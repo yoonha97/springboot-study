@@ -1,9 +1,9 @@
-package com.kt.springbootstudy.domain.post.model;
+package com.kt.springbootstudy.domain.post.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kt.springbootstudy.domain.comment.model.Comment;
+import com.kt.springbootstudy.domain.comment.entity.Comment;
 
 import jakarta.persistence.*;
 import lombok.*;

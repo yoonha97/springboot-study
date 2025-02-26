@@ -1,7 +1,7 @@
-package com.kt.springbootstudy.service;
+package com.kt.springbootstudy.domain.post.service;
 
-import com.kt.springbootstudy.domain.post.model.Post;
-import com.kt.springbootstudy.repository.PostRepository;
+import com.kt.springbootstudy.domain.post.entity.Post;
+import com.kt.springbootstudy.domain.post.repository.PostRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

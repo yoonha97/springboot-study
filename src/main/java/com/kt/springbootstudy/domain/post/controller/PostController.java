@@ -1,7 +1,7 @@
-package com.kt.springbootstudy.controller;
+package com.kt.springbootstudy.domain.post.controller;
 
-import com.kt.springbootstudy.domain.post.model.Post;
-import com.kt.springbootstudy.service.PostService;
+import com.kt.springbootstudy.domain.post.entity.Post;
+import com.kt.springbootstudy.domain.post.service.PostService;
 
 import lombok.RequiredArgsConstructor;
 

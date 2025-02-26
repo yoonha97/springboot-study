@@ -1,14 +1,14 @@
-package com.kt.springbootstudy.service;
+package com.kt.springbootstudy.domain.comment.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.kt.springbootstudy.domain.comment.model.Comment;
-import com.kt.springbootstudy.domain.post.model.Post;
-import com.kt.springbootstudy.repository.CommentRepository;
-import com.kt.springbootstudy.repository.PostRepository;
+import com.kt.springbootstudy.domain.comment.entity.Comment;
+import com.kt.springbootstudy.domain.comment.repository.CommentRepository;
+import com.kt.springbootstudy.domain.post.entity.Post;
+import com.kt.springbootstudy.domain.post.repository.PostRepository;
 
 import lombok.RequiredArgsConstructor;
 

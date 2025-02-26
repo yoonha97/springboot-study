@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.kt.springbootstudy.domain.comment.dto.CommentDto;
-import com.kt.springbootstudy.domain.post.model.Post;
+import com.kt.springbootstudy.domain.post.entity.Post;
 
 @Getter
 public class PostDto {
