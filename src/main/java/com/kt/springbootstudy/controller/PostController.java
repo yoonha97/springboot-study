@@ -3,6 +3,8 @@ package com.kt.springbootstudy.controller;
 import com.kt.springbootstudy.model.Post;
 import com.kt.springbootstudy.service.PostService;
 
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,12 +13,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/posts")
+@RequiredArgsConstructor
 public class PostController {
 	private final PostService postService;
-
-	public PostController(PostService postService) {
-		this.postService = postService;
-	}
 
 	// 모든 글 조회
 	@GetMapping
