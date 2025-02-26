@@ -1,5 +1,8 @@
 package com.kt.springbootstudy.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,4 +25,13 @@ public class Post {
 
     @Column(nullable = false)
     private String author; // 작성자
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
+    /*
+     * @OneToMany(mappedBy = "post") → 게시글이 여러 개의 댓글을 가짐
+     * cascade=CascadeType.ALL → 게시글 삭제 시 관련 댓글도 삭제
+     * orphanRemoval=true → 댓글이 더 이상 참조되지 않으면 삭제
+     */
 }
