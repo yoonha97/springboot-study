@@ -2,6 +2,9 @@ package com.kt.springbootstudy.service;
 
 import com.kt.springbootstudy.model.Post;
 import com.kt.springbootstudy.repository.PostRepository;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,13 +34,14 @@ public class PostService {
 	}
 
 	// 글 수정
+	@Transactional
 	public boolean updatePost(int id, Post newPost) {
 		return postRepository.findById(id)
 				.map(post -> {
 					post.setTitle(newPost.getTitle());
 					post.setContent(newPost.getContent());
 					post.setAuthor(newPost.getAuthor());
-					postRepository.save(post);
+					// save() 호출 불필요 (Dirty Checking)
 					return true;
 				}).orElse(false);
 	}
