@@ -28,7 +28,7 @@ public class Post {
     @Column(nullable = false)
     private String author; // 작성자
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     /*
